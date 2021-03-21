@@ -22,4 +22,5 @@
     <string name="button_completed">Download Completed</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="message">no download option selected. Select one and try again</string>
+    <string name="go_main">Go Main</string>
 </resources>

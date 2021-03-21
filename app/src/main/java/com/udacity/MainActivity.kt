@@ -1,13 +1,11 @@
 package com.udacity
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
@@ -25,8 +23,8 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "Permission"
-    private val RECORD_REQUEST_CODE = 101
+    private val REQUEST_CODE = 101
+    private val arrayPermissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     private var IdDownload: Long = 0
 
@@ -41,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        setupPermissions()
+        val permissions = Permissions()
+        permissions.validarPermissoes(arrayPermissions, this, REQUEST_CODE)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
@@ -51,34 +50,31 @@ class MainActivity : AppCompatActivity() {
         createChannel(CHANNEL_ID, getString(R.string.channel_name))
     }
 
-    private fun setupPermissions() {
-        val permission = ContextCompat.checkSelfPermission(this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            makeRequest()
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            RECORD_REQUEST_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    makeRequest()
-                }
-            }
+
+        for(permissao: Int in grantResults) {
+            if(permissao == PackageManager.PERMISSION_DENIED) {
+                alertPermissions()
+            } else if (permissao == PackageManager.PERMISSION_GRANTED){}
         }
     }
 
-    private fun makeRequest() {
-        ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            RECORD_REQUEST_CODE)
+    private fun alertPermissions() {
+        val builder : AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Permissions Denied")
+        builder.setMessage("This app required your permissions")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Confirm", DialogInterface.OnClickListener { dialog, which ->
+            finish()
+        })
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun clickButton() {

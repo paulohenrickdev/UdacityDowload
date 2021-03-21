@@ -37,7 +37,7 @@ fun NotificationManager.sendNotification(
         .setContentTitle(applicationContext.getString(R.string.download_complete))
         .setContentText(msg)
         .setContentIntent(contentPendingIntent)
-        .setAutoCancel(true)
+        .setAutoCancel(false)
         .addAction(
             R.drawable.ic_download_done,
             applicationContext.resources.getString(R.string.see_details),
