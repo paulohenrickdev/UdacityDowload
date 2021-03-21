@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+<!--    Using ConstraintLayout as it leaves a layout that can be quite complex-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/custom_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/glide_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_glide"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/udacity_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_project"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/retrofit_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_retrofit"
+                />
+        </RadioGroup>
+
+        <com.udacity.LoadingButton
+            android:id="@+id/custom_button"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            app:completedButtonColor="#7159c1"
+            app:textColor="@android:color/black"
+            app:loadingAnimationColor="#7159c1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

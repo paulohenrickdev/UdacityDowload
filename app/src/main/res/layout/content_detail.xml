@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    Using MotionLayout as animations will be made :D-->
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailActivity"
+        tools:showIn="@layout/activity_detail"
+        app:layoutDescription="@xml/animation_motion_layout">
+        <TextView
+            android:id="@+id/title"
+            android:layout_margin="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/default_text_size"
+            android:textColor="@color/colorPrimaryDark"/>
+        <TextView
+            android:id="@+id/status"
+            android:layout_margin="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/default_text_size"
+            android:textColor="@color/colorPrimaryDark"/>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>
